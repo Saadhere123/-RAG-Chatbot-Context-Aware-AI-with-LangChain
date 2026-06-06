@@ -2,7 +2,8 @@
 
 A production-grade **Retrieval-Augmented Generation (RAG)** chatbot built with:
 - **LangChain** — orchestration, chains, memory
-- **OpenAI** — embeddings (`sentence-transformers/all-MiniLM-L6-v2 (local)`) + chat (`gpt-3.5-turbo` / `gpt-4o`)
+- **Groq API** — Free LLaMA 3 models (llama3-70b-8192)
+- **TF-IDF Embeddings** — 100% local, no internet required
 - **FAISS** — local vector store with MMR retrieval
 - **Streamlit** — interactive chat UI
 
@@ -15,19 +16,19 @@ A production-grade **Retrieval-Augmented Generation (RAG)** chatbot built with:
 pip install -r requirements.txt
 ```
 
-### 2. Set up your API key
-```bash
-cp .env.example .env
-# Edit .env and add your Grok xAI API key
-```
+### 2. Get FREE Groq API Key
+1. Go to **https://console.groq.com**
+2. Sign up (free)
+3. Go to **API Keys** → Create API Key
+4. Copy your key (starts with `gsk_...`)
 
 ### 3. Run the app
 ```bash
-streamlit run app.py
+python -m streamlit run app.py
 ```
 
 ### 4. Use the chatbot
-1. Enter your **Grok xAI API key** in the sidebar
+1. Enter your **Groq API key** (`gsk_...`) in the sidebar
 2. Choose a knowledge base (built-in sample, upload files, or paste text)
 3. Click **🚀 Build Knowledge Base**
 4. Start chatting!
@@ -35,8 +36,6 @@ streamlit run app.py
 ---
 
 ## 📁 Project Structure
-
-```
 rag_chatbot/
 ├── app.py                    # Streamlit UI
 ├── requirements.txt          # Dependencies
@@ -46,35 +45,27 @@ rag_chatbot/
 │   └── document_loader.py    # Document loaders (sample corpus + file uploads)
 ├── data/                     # Drop extra .txt / .pdf files here
 └── vectorstore/              # FAISS index saved here (auto-created)
-```
-
----
 
 ## 🏗️ Architecture
-
-```
 User Query
-    │
-    ▼
-ConversationBufferWindowMemory  ←── Chat History (last N turns)
-    │
-    ▼
-ConversationalRetrievalChain
-    │
-    ├── Condense Question (with history) ──► Standalone Question
-    │
-    ▼
-FAISS Vector Store  (MMR Retrieval)
-    │  sentence-transformers/all-MiniLM-L6-v2 (local)
-    ▼
-Top-K Relevant Chunks
-    │
-    ▼
-ChatOpenAI (GPT-3.5/4o)
-    │  System prompt + context + history
-    ▼
+│
+▼
+Chat History (last N turns)
+│
+▼
+TF-IDF Embedder (local, no download)
+│
+▼
+FAISS Vector Store (MMR Retrieval)
+│
+▼
+Top-K Relevant Chunks + Context
+│
+▼
+Groq API — LLaMA 3 (llama3-70b-8192)
+│
+▼
 Answer + Source Citations
-```
 
 ---
 
@@ -82,7 +73,7 @@ Answer + Source Citations
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| Model | gpt-3.5-turbo | LLM for generation |
+| Model | llama3-70b-8192 | Free LLaMA 3 via Groq |
 | Temperature | 0.3 | Response creativity (0=deterministic) |
 | Top-K | 3 | Number of chunks retrieved per query |
 | Memory Window | 5 | Conversation turns to remember |
@@ -106,10 +97,10 @@ The built-in corpus covers:
 ## 🧩 Skills Demonstrated
 
 - ✅ **Conversational AI** with persistent context memory
-- ✅ **Document embedding** using OpenAI's embedding API
+- ✅ **Local TF-IDF Embeddings** — no internet, no API cost
 - ✅ **Vector similarity search** with FAISS + MMR
 - ✅ **RAG pipeline** — retrieval-augmented generation
-- ✅ **LLM integration** via LangChain + OpenAI
+- ✅ **LLM integration** via LangChain + Groq API (FREE)
 - ✅ **Streamlit deployment** with polished dark UI
 - ✅ **File upload support** for .txt and .pdf documents
 
@@ -117,6 +108,8 @@ The built-in corpus covers:
 
 ## 📝 Notes
 
-- The FAISS vector store is in-memory; rebuild on each session or use `save_vectorstore()` to persist
+- Groq API is **completely free** — no credit card required
+- TF-IDF embeddings are **100% local** — no HuggingFace download needed
+- FAISS vector store is in-memory — rebuilds on each session
 - For production, replace FAISS with Pinecone/Weaviate and add authentication
-- Costs ~$0.001–0.005 per query with gpt-3.5-turbo + sentence-transformers/all-MiniLM-L6-v2 (local)
+
