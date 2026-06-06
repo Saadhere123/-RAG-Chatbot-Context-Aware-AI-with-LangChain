@@ -16,7 +16,7 @@ A production-grade **Retrieval-Augmented Generation (RAG)** chatbot built with:
 pip install -r requirements.txt
 ```
 
-### 2. Get FREE Groq API Key
+### 2. Get buy Groq API Key 
 1. Go to **https://console.groq.com**
 2. Sign up (free)
 3. Go to **API Keys** → Create API Key
@@ -108,7 +108,7 @@ The built-in corpus covers:
 
 ## 📝 Notes
 
-- Groq API is **completely free** — no credit card required
+- Groq API is credit card required $5 doller credit
 - TF-IDF embeddings are **100% local** — no HuggingFace download needed
 - FAISS vector store is in-memory — rebuilds on each session
 - For production, replace FAISS with Pinecone/Weaviate and add authentication
