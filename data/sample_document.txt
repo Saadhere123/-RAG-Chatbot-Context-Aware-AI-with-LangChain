@@ -1,0 +1,31 @@
+Title: Introduction to Data Science
+
+Data science is an interdisciplinary field that uses scientific methods, processes, algorithms,
+and systems to extract knowledge and insights from noisy, structured, and unstructured data.
+It employs techniques from mathematics, statistics, computer science, and domain expertise.
+
+The data science process typically follows these steps:
+1. Problem Definition — clearly state the business question
+2. Data Collection — gather relevant datasets from APIs, databases, web scraping
+3. Data Cleaning — handle missing values, outliers, inconsistencies
+4. Exploratory Data Analysis (EDA) — visualize distributions, correlations, patterns
+5. Feature Engineering — create informative features from raw data
+6. Model Building — train and tune machine learning models
+7. Evaluation — assess model performance with appropriate metrics
+8. Deployment — serve the model in production via APIs or dashboards
+
+Key Python tools for data science:
+- Pandas: data manipulation and analysis with DataFrames
+- NumPy: numerical computing with arrays
+- Matplotlib / Seaborn / Plotly: data visualization
+- Scikit-learn: classical machine learning algorithms
+- XGBoost / LightGBM: gradient boosting frameworks
+- Jupyter Notebooks: interactive development environment
+
+Statistical concepts essential for data science include probability distributions, hypothesis
+testing, confidence intervals, A/B testing, Bayesian inference, and regression analysis.
+
+The difference between data science, data analytics, and data engineering:
+- Data Analytics focuses on descriptive analysis and business intelligence
+- Data Engineering builds pipelines to collect and store data
+- Data Science combines both with predictive modeling and experimentation
